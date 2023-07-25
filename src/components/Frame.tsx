@@ -20,7 +20,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import AvatarImage from "../assests/AvatarImage.jpg";
-import ProfileImage from "../assests/ProfileImage.jpg"  
+import ProfileImage from "../assests/ProfileImage.jpg";
 import MyImage from "../assests/MyImage.jpg";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -29,15 +29,15 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
-import AttractionsIcon from '@mui/icons-material/Attractions';
-import InfoIcon from '@mui/icons-material/Info';
+import AttractionsIcon from "@mui/icons-material/Attractions";
+import InfoIcon from "@mui/icons-material/Info";
+import FileDownloadTwoToneIcon from "@mui/icons-material/FileDownloadTwoTone";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import Home from "./Home";
 import About from "./About";
 import Skills from "./Skills";
 import Resume from "./Resume";
 import Contact from "./Contact";
-
-
 
 const drawerWidth = 240;
 
@@ -90,6 +90,22 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+const downloadResume = () => {
+  let fetchRes = fetch("Nitish_Resume_2YOP .pdf");
+  fetchRes.then((res) =>
+    res.blob().then((blob) => {
+      // Creating new object of PDF file
+      const fileURL = window.URL.createObjectURL(blob);
+      // Setting various property values
+      let alink = document.createElement("a");
+      console.log("102..", alink);
+      alink.href = fileURL;
+      alink.download = "Nitish_Resume_2YOP .pdf ";
+      alink.click();
+    })
+  );
+};
+
 export default function Frame() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -100,6 +116,11 @@ export default function Frame() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const jumpToReleventDiv = (id: any) => {
+    const releventDiv: any = document.getElementById(id);
+    releventDiv.scrollIntoView({ behavior: "smooth" });
   };
 
   const profile = () => {
@@ -119,7 +140,6 @@ export default function Frame() {
     );
   };
 
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -134,8 +154,12 @@ export default function Frame() {
           >
             <MenuIcon />
           </IconButton>
-          <div className="w-100 d-flex justify-content-end">
-          Download Resume
+          <div
+            onClick={downloadResume}
+            className="w-100 d-flex justify-content-end download-resume"
+          >
+            Download Resume
+            {/* <FileDownloadOutlinedIcon /> */}
           </div>
           {/* <Typography variant="h6" noWrap component="div">
             Download Resume
@@ -167,16 +191,44 @@ export default function Frame() {
         <Divider />
         {profile()}
         <List>
-          {["Home", "About","Skills", "Resume","Contact"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index === 0 ? <HomeIcon /> : index === 1 ? <PermIdentityIcon /> : index === 2 ? <AttractionsIcon />: index === 3? <TextSnippetIcon /> : <InfoIcon /> }
-                </ListItemIcon>
-                <a href={index === 0 ? "hero" : index === 1 ? "about" : index === 2 ? "skills": index === 3? "resume" : "contact" } className="nav-link scrollto"><ListItemText primary={text} /></a>
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {["Home", "About", "Skills", "Resume", "Contact"].map(
+            (text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index === 0 ? (
+                      <HomeIcon />
+                    ) : index === 1 ? (
+                      <PermIdentityIcon />
+                    ) : index === 2 ? (
+                      <AttractionsIcon />
+                    ) : index === 3 ? (
+                      <TextSnippetIcon />
+                    ) : (
+                      <InfoIcon />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText
+                    onClick={() =>
+                      jumpToReleventDiv(
+                        index === 0
+                          ? "hero"
+                          : index === 1
+                          ? "about"
+                          : index === 2
+                          ? "skills"
+                          : index === 3
+                          ? "resume"
+                          : "contact"
+                      )
+                    }
+                    primary={text}
+                  />
+                  {/* <a href={index === 0 ? "hero" : index === 1 ? "about" : index === 2 ? "skills": index === 3? "resume" : "contact" } className="nav-link scrollto"><ListItemText primary={text} /></a> */}
+                </ListItemButton>
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
       <Main open={open}>
