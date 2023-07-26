@@ -127,13 +127,15 @@ export default function Frame() {
     return (
       <>
         <div>
-          <img src={MyImage} alt="Logo" className="profile" />
-          <div>Nitish Kumar</div>
-          <div className="social-Icons">
-            <LinkedInIcon />
-            <FacebookIcon />
-            <InstagramIcon />
-            <TwitterIcon />
+          <div className="d-flex justify-content-center align-items-center">
+            <img src={MyImage} alt="Logo" className="profile" />
+          </div>
+          <div className="d-flex justify-content-center align-items-center"><h5>Nitish Kumar</h5></div>
+          <div className="social-Icons d-flex justify-content-center align-items-center">
+            <LinkedInIcon className="social-icons"/>
+            <FacebookIcon className="social-icons mx-1" />
+            <InstagramIcon className="social-icons mx-1" />
+            <TwitterIcon className="social-icons" />
           </div>
         </div>
       </>
