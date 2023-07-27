@@ -3,8 +3,8 @@ import React from "react";
 export default function About() {
   return (
     <>
-      {/* <section id="about" className="d-flex flex-column justify-content-center align-items-center"> */}
-      <div id="about" >
+      <section id="about" className="d-flex flex-column justify-content-center align-items-center">
+      <div >
         <h5 className="text-primary">About</h5>
         <div>
           ReactJS developers are front-end developers who build modern-day UI
@@ -14,7 +14,7 @@ export default function About() {
           robust and effective application.
         </div>
       </div>
-      {/* </section> */}
+      </section>
     </>
   );
 }

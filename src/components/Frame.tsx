@@ -109,6 +109,28 @@ const downloadResume = () => {
 export default function Frame() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const [activeSection, setActiveSection] = React.useState("");
+  React.useEffect(() => {
+    //Function to handle scroll
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("[id]");
+      let currentActive = "";
+      sections.forEach((section: any) => {
+        console.log("119..",section.id)
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 0 && rect.bottom > 0) {
+          console.log("122..",section.id)
+          currentActive = section.id;
+        }
+        console.log("120...", currentActive);
+      });
+      setActiveSection(currentActive);
+      console.log("126...", sections);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -130,9 +152,11 @@ export default function Frame() {
           <div className="d-flex justify-content-center align-items-center">
             <img src={MyImage} alt="Logo" className="profile" />
           </div>
-          <div className="d-flex justify-content-center align-items-center"><h5>Nitish Kumar</h5></div>
+          <div className="d-flex justify-content-center align-items-center">
+            <h5>Nitish Kumar</h5>
+          </div>
           <div className="social-Icons d-flex justify-content-center align-items-center">
-            <LinkedInIcon className="social-icons"/>
+            <LinkedInIcon className="social-icons" />
             <FacebookIcon className="social-icons mx-1" />
             <InstagramIcon className="social-icons mx-1" />
             <TwitterIcon className="social-icons" />
@@ -195,7 +219,7 @@ export default function Frame() {
         <List>
           {["Home", "About", "Skills", "Resume", "Contact"].map(
             (text, index) => (
-              <ListItem key={text} disablePadding>
+              <ListItem key={text} className={activeSection === 'hero' ? 'active' : ''} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     {index === 0 ? (

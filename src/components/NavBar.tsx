@@ -26,6 +26,19 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 export default function NavBar() {
   const [navBarState, setNavBarState] = React.useState(true);
+  const [activeSection, setActiveSection] = React.useState("");
+  React.useEffect(() => {
+    //Function to handle scroll
+    alert("...")
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("[id]");
+      let currentActive = '';
+      setActiveSection(currentActive);
+      console.log("35...",sections);
+    };
+
+    window.addEventListener('scroll',handleScroll);
+  }, []);
   const toggleDrawer = () => {
     setNavBarState(!navBarState);
   };
@@ -85,19 +98,14 @@ export default function NavBar() {
   };
   return (
     <React.Fragment>
-      
-            <Button onClick={toggleDrawer}>
-              <MenuIcon />
-            </Button>
-            <Drawer
-              className="drawer"
-              open={navBarState} /*onClose={toggleDrawer}*/
-            >
-              {profile()}
-              {navList()}
-              {/* <CancelIcon onClick={toggleDrawer} />  */}
-            </Drawer>
-          
+      <Button onClick={toggleDrawer}>
+        <MenuIcon />
+      </Button>
+      <Drawer className="drawer" open={navBarState} /*onClose={toggleDrawer}*/>
+        {profile()}
+        {navList()}
+        {/* <CancelIcon onClick={toggleDrawer} />  */}
+      </Drawer>
     </React.Fragment>
   );
 }
