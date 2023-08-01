@@ -38,6 +38,8 @@ import About from "./About";
 import Skills from "./Skills";
 import Resume from "./Resume";
 import Contact from "./Contact";
+import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -111,26 +113,58 @@ export default function Frame() {
   const [open, setOpen] = React.useState(true);
   const [activeSection, setActiveSection] = React.useState("");
   React.useEffect(() => {
-    //Function to handle scroll
-    const handleScroll = () => {
-      const sections = document.querySelectorAll("[id]");
-      let currentActive = "";
-      sections.forEach((section: any) => {
-        console.log("119..",section.id)
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 0 && rect.bottom > 0) {
-          console.log("122..",section.id)
-          currentActive = section.id;
-        }
-        console.log("120...", currentActive);
-      });
-      setActiveSection(currentActive);
-      console.log("126...", sections);
+     const handleScroll = () => {
+      const sectionOneTop:any = document?.getElementById("hero")?.offsetTop;
+      const sectionTwoTop:any = document?.getElementById("about")?.offsetTop;
+      const sectionThreeTop:any = document.getElementById("skills")?.offsetTop;
+      const sectionFourTop:any = document?.getElementById("resume")?.offsetTop;
+      const sectionFiveTop:any = document.getElementById("contact")?.offsetTop;
+
+
+      const scrollPosition = window.scrollY;
+
+      if (scrollPosition >= sectionFiveTop) {
+        setActiveSection("contact");
+      } else if (scrollPosition >= sectionFourTop) {
+        setActiveSection("resume");
+      }
+      else if (scrollPosition >= sectionThreeTop) {
+        setActiveSection("skills");
+      } else if (scrollPosition >= sectionTwoTop) {
+        setActiveSection("about");
+      }
+       else {
+        setActiveSection("hero");
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+    //Function to handle scroll
+    // const handleScroll = () => {
+    //   const sections = document.querySelectorAll("[id]");
+    //   let currentActive = "";
+    //   sections.forEach((section: any) => {
+    //     console.log("119..",section.id)
+    //     const rect = section.getBoundingClientRect();
+    //     console.log("121...",rect,rect.bottom,rect.top)
+    //     if (rect.top <= 0 && rect.bottom > 0) {
+    //       console.log("122..",section.id)
+    //       currentActive = section.id;
+    //     }
+    //     console.log("120...", currentActive);
+    //   });
+    //   setActiveSection(currentActive);
+    //   console.log("126...", sections);
+    // };
+
+    // window.addEventListener("scroll", handleScroll);
+    // return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -165,7 +199,6 @@ export default function Frame() {
       </>
     );
   };
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -216,10 +249,26 @@ export default function Frame() {
         </DrawerHeader>
         <Divider />
         {profile()}
-        <List>
-          {["Home", "About", "Skills", "Resume", "Contact"].map(
+        
+       <NavBar />
+        {/* <List> */}
+        {/* <ListItem key={"Home"} className={activeSection === 'hero' ? 'active' : ''} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                  <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    onClick={() =>
+                      jumpToReleventDiv("hero")
+                    }
+                    primary={"Home"}
+                  />
+                   </ListItemButton>
+              </ListItem> */}
+
+          {/* {["Home", "About", "Skills", "Resume", "Contact"].map(
             (text, index) => (
-              <ListItem key={text} className={activeSection === 'hero' ? 'active' : ''} disablePadding>
+              <ListItem key={text}  disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     {index === 0 ? (
@@ -250,12 +299,12 @@ export default function Frame() {
                     }
                     primary={text}
                   />
-                  {/* <a href={index === 0 ? "hero" : index === 1 ? "about" : index === 2 ? "skills": index === 3? "resume" : "contact" } className="nav-link scrollto"><ListItemText primary={text} /></a> */}
+                  <a href={index === 0 ? "hero" : index === 1 ? "about" : index === 2 ? "skills": index === 3? "resume" : "contact" } className="nav-link scrollto"><ListItemText primary={text} /></a>
                 </ListItemButton>
               </ListItem>
             )
-          )}
-        </List>
+          )} */}
+        {/* </List> */}
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
