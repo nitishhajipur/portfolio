@@ -1,7 +1,7 @@
 import React from "react";
-import NavBar from "./components/NavBar";
 import Frame from "./components/Frame";
 import AvatarImage from "./assests/AvatarImage.jpg";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // import './components/styles.scss'
 
 export default function App() {
@@ -22,7 +22,12 @@ export default function App() {
           </div>
         </div>
       </div> */}
-      <Frame />
+      {/* <Frame /> */}
+      <Router>
+      <Routes>
+      <Route  path="/" element={<Frame />} />
+      </Routes>
+      </Router>
     </div>
   );
 }

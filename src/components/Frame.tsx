@@ -306,11 +306,11 @@ export default function Frame() {
           )} */}
         {/* </List> */}
       </Drawer>
-      <Main open={open}>
+      <Main open={open}>  
         <DrawerHeader />
         <Home />
         <About />
-        <Skills />
+        <Skills />  
         <Resume />
         <Contact />
       </Main>
