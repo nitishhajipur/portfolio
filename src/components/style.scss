@@ -30,7 +30,22 @@
   padding: 0px !important ;
 }
 
-.active {
-  color: blue; /* Apply your preferred active link style here */
-  font-weight: bold;
+
+
+.navbar{
+  ul{
+    list-style: none !important;
+  }
+  li{
+    text-decoration: none !important;
+    margin: 7px;
+  }
+  .active {
+    color: blue !important; /* Apply your preferred active link style here */
+    font-weight: bold;
+  }
+  a{
+    text-decoration: none !important;
+    color: black !important;
+  }
 }

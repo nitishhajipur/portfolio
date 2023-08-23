@@ -6,8 +6,68 @@ import About from "./About";
 import Contact from "./Contact";
 import Skills from "./Skills";
 import Resume from "./Resume";
+import HomeIcon from "@mui/icons-material/Home";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
+import AttractionsIcon from "@mui/icons-material/Attractions";
+import InfoIcon from "@mui/icons-material/Info";
 import { HashLink, NavHashLink } from "react-router-hash-link";
 const NavBar = () => {
+  const [activeSection, setActiveSection] = React.useState("");
+  React.useEffect(() => {
+    //  const handleScroll = () => {
+    //   const sectionOneTop:any = document?.getElementById("hero")?.offsetTop;
+    //   const sectionTwoTop:any = document?.getElementById("about")?.offsetTop;
+    //   const sectionThreeTop:any = document.getElementById("skills")?.offsetTop;
+    //   const sectionFourTop:any = document?.getElementById("resume")?.offsetTop;
+    //   const sectionFiveTop:any = document.getElementById("contact")?.offsetTop;
+
+
+    //   const scrollPosition = window.scrollY;
+    //   console.log("27.....",scrollPosition,sectionTwoTop,sectionThreeTop,sectionFourTop,sectionOneTop)
+
+    //   if (scrollPosition >= sectionFiveTop) {
+    //     setActiveSection("contact");
+    //   } else if (scrollPosition >= sectionFourTop) {
+    //     setActiveSection("resume");
+    //   }
+    //   else if (scrollPosition >= sectionThreeTop) {
+    //     setActiveSection("skills");
+    //   } else if (scrollPosition >= sectionTwoTop) {
+    //     setActiveSection("about");
+    //   }
+    //    else {
+    //     setActiveSection("hero");
+    //   }
+    // };
+
+    // document.addEventListener("scroll", handleScroll);
+
+    // return () => {
+    //   document.removeEventListener("scroll", handleScroll);
+    // };
+    //Function to handle scroll
+    // const handleScroll = () => {
+    //   const sections = document.querySelectorAll("[id]");
+    //   let currentActive = "";
+    //   sections.forEach((section: any) => {
+    //     console.log("119..",section.id)
+    //     const rect = section.getBoundingClientRect();
+    //     console.log("121...",rect,rect.bottom,rect.top)
+    //     if (rect.top <= 0 && rect.bottom > 0) {
+    //       console.log("122..",section.id)
+    //       currentActive = section.id;
+    //     }
+    //     console.log("120...", currentActive);
+    //   });
+    //   setActiveSection(currentActive);
+    //   console.log("126...", sections);
+    // };
+
+    // window.addEventListener("scroll", handleScroll);
+    // return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   return (
     // <React.Fragment>
     //      </React.Fragment>
@@ -47,7 +107,7 @@ const NavBar = () => {
     //     </Route> */}
     //   </div>
     // </Router>
-    <div>
+    <div className="navbar">
       <ul>
         {/* <li>
           <NavHashLink
@@ -58,12 +118,12 @@ const NavBar = () => {
             Home
           </NavHashLink>
         </li> */}
-        <li>
+        <li className={activeSection === 'hero' ? 'active' : ''}>
           <HashLink
             scroll={(el: any) => el.scrollIntoView({ behavior: "smooth" })}
             to={"/#hero"}
           >
-            Home
+           <HomeIcon /> Home
           </HashLink>
         </li>
         <li>
@@ -71,7 +131,7 @@ const NavBar = () => {
             scroll={(el: any) => el.scrollIntoView({ behavior: "smooth" })}
             to={"/#about"}
           >
-            About
+           <PermIdentityIcon /> About
           </HashLink>
         </li>
         <li>
@@ -79,7 +139,7 @@ const NavBar = () => {
             scroll={(el: any) => el.scrollIntoView({ behavior: "smooth" })}
             to={"/#skills"}
           >
-            Skills
+            <AttractionsIcon /> Skills
           </HashLink>
         </li>
         <li>
@@ -87,7 +147,7 @@ const NavBar = () => {
             scroll={(el: any) => el.scrollIntoView({ behavior: "smooth" })}
             to={"/#resume"}
           >
-            Resume
+            <TextSnippetIcon /> Resume
           </HashLink>
         </li>
         <li>
@@ -95,7 +155,7 @@ const NavBar = () => {
             scroll={(el: any) => el.scrollIntoView({ behavior: "smooth" })}
             to={"/#contact"}
           >
-            Contact
+           <InfoIcon /> Contact
           </HashLink>
         </li>
       </ul>
